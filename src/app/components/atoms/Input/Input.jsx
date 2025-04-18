@@ -2,7 +2,7 @@ import React from "react";
 //styles
 import { InputContainer } from "./styles";
 
-const Input = ({ type, name, value, onChange, placeholder }) => {
+const Input = ({ type, name, value, onChange, placeholder, hasError }) => {
   return (
     <InputContainer
       type={type}
@@ -10,6 +10,7 @@ const Input = ({ type, name, value, onChange, placeholder }) => {
       value={value}
       onChange={onChange}
       placeholder={placeholder}
+      hasError={hasError}
     />
   );
 };

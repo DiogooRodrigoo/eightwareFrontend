@@ -16,7 +16,7 @@ const InputField = ({
 }) => {
   return (
     <InputFieldContainer>
-      <Label label={labelInput} />
+      <Label label={labelInput} hasError={!!error} />
 
       <Input
         type={typeInput}
@@ -24,9 +24,14 @@ const InputField = ({
         value={valueInput}
         onChange={onChangeInput}
         placeholder={placeholderInput}
+        hasError={!!error}
       />
 
-      {error && <span style={{ color: "red", fontSize: "12px" }}>{error}</span>}
+      {error && (
+        <span style={{ color: "red", fontSize: "13px", fontWeight: 300 }}>
+          {error}
+        </span>
+      )}
     </InputFieldContainer>
   );
 };

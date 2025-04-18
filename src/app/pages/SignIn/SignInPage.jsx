@@ -3,10 +3,9 @@ import React from "react";
 import Image from "next/image";
 //styles
 import * as C from "./styles";
-import { ContentsContainer } from "@/app/styles/styles";
+import { ContentsContainer } from "../../styles/styles";
 //components
-import SignInForm from "@/app/components/organisms/SignInForm/SignInForm";
-import Button from "@/app/components/atoms/Button/Button";
+import SignInForm from "../../components/organisms/SignInForm/SignInForm";
 //assets
 import IllustrationImage from "../../assets/Illustration_SignIn.png";
 
@@ -19,11 +18,9 @@ const SignInPage = () => {
           Digite seu e-mail e senha para acessar sua conta.
         </C.Description>
         <SignInForm />
-
-        <Button>Entrar</Button>
       </C.FormContainer>
 
-      <Image src={IllustrationImage} />
+      <Image src={IllustrationImage} width={450} height={450} />
     </ContentsContainer>
   );
 };

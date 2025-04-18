@@ -6,5 +6,5 @@ export const ContentsContainer = styled.div`
   align-items: center;
   height: 100vh;
   width: 100vw;
-  gap: 10rem;
+  gap: 5rem;
 `;
