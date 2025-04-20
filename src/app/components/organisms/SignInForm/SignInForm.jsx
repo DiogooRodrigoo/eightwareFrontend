@@ -36,7 +36,7 @@ export default function SignInForm() {
       const data = await signIn(email, password);
       console.log("Login bem-sucedido:", data);
 
-      // router.push("/profile");
+      router.push("/profile");
     } catch (err) {
       setGeneralError("Erro ao tentar logar.");
     }

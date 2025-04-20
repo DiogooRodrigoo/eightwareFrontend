@@ -4,13 +4,12 @@ export default function useAuth() {
   const signIn = async (email, password) => {
     console.log("E-mail:", email);
     console.log("Senha:", password);
-    const res = await fetch(`http://localhost:4000/auth/sign_in`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/sign_in`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ user: { email, password } }),
-      credentials: "include",
     });
 
     const data = await res.json();
