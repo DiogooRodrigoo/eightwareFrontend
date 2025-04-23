@@ -20,7 +20,7 @@ const SignInPage = () => {
         <SignInForm />
       </C.FormContainer>
 
-      <Image src={IllustrationImage} width={450} height={450} />
+      <Image src={IllustrationImage} alt="Image" width={450} height={450} />
     </ContentsContainer>
   );
 };

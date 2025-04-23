@@ -10,3 +10,7 @@ export const getAuthToken = () => {
 export const isAuthenticated = (token) => {
   return !!token;
 };
+
+export const removeAuthToken = () => {
+  document.cookie = "token=; path=/; max-age=0";
+};

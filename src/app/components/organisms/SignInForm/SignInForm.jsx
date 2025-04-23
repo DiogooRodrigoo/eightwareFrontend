@@ -7,7 +7,7 @@ import InputField from "../../molecules/InputField/InputField";
 //utils
 import { validateLoginForm } from "../../../utils/validateLoginForm";
 //hooks
-import useAuth from "../../../hooks/useAuth";
+import useAuth from "../../../hooks/useSessions";
 
 export default function SignInForm() {
   const { signIn } = useAuth();

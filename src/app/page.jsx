@@ -1,7 +1,7 @@
 "use client";
 
 import SignInPage from "./pages/SignIn/SignInPage";
-import { isAuthenticated } from "./utils/authToken";
+import { isAuthenticated } from "./utils/tokenStorage";
 import { useEffect } from "react";
 import { useRouter, usePathname } from "next/navigation";
 

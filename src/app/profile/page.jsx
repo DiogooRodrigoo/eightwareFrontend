@@ -2,26 +2,32 @@
 
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-//contexts
-import { useAuthContext } from "../context/AuthProvider";
+import { useAuthContext } from "../context/SessionsProvider";
 
 export default function Profile() {
   const router = useRouter();
-  const { isAuthenticated } = useAuthContext();
-
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const { isAuthenticated, logout } = useAuthContext();
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
-    if (mounted && !isAuthenticated) {
-      router.push("/login");
+    setIsClient(true);
+
+    if (typeof window !== "undefined" && !isAuthenticated) {
+      router.replace("/");
     }
-  }, [mounted, isAuthenticated]);
+  }, [isAuthenticated, router]);
 
-  if (!mounted) return null;
+  const handleLogout = () => {
+    logout();
+    router.push("/login");
+  };
 
-  return <div>Bem-vindo ao seu perfil!</div>;
+  if (!isClient || !isAuthenticated) return null;
+
+  return (
+    <div>
+      <h1>Bem-vindo ao seu perfil!</h1>
+      <button onClick={handleLogout}>Sair</button>
+    </div>
+  );
 }
