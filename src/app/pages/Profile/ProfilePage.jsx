@@ -7,7 +7,7 @@ import { useAuthContext } from "../../context/SessionsProvider";
 import ProfileForm from "../../components/organisms/ProfileForm/ProfileForm";
 import Button from "../../components/atoms/Button/Button";
 //styles
-import { PageContainer } from "./styles";
+import * as C from "./styles";
 
 const ProfilePage = () => {
   const router = useRouter();
@@ -30,12 +30,14 @@ const ProfilePage = () => {
   if (!isClient || !isAuthenticated) return null;
 
   return (
-    <PageContainer>
-      <ProfileForm />
-      <Button type="submit" onClick={handleLogout}>
-        Sair
-      </Button>
-    </PageContainer>
+    <C.PageContainer>
+      <C.ContentsContainer>
+        <ProfileForm />
+        <Button type="submit" onClick={handleLogout}>
+          Sair
+        </Button>
+      </C.ContentsContainer>
+    </C.PageContainer>
   );
 };
 

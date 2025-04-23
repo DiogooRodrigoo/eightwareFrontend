@@ -3,7 +3,6 @@ import React from "react";
 import Image from "next/image";
 //styles
 import * as C from "./styles";
-import { ContentsContainer } from "../../styles/styles";
 //components
 import SignInForm from "../../components/organisms/SignInForm/SignInForm";
 //assets
@@ -11,7 +10,7 @@ import IllustrationImage from "../../assets/Illustration_SignIn.png";
 
 const SignInPage = () => {
   return (
-    <ContentsContainer>
+    <C.ContentsContainer>
       <C.FormContainer>
         <C.Title>Seja bem-vindo!</C.Title>
         <C.Description>
@@ -20,8 +19,8 @@ const SignInPage = () => {
         <SignInForm />
       </C.FormContainer>
 
-      <Image src={IllustrationImage} alt="Image" width={450} height={450} />
-    </ContentsContainer>
+      <Image src={IllustrationImage} alt="Image" width={300} height={300} />
+    </C.ContentsContainer>
   );
 };
 
