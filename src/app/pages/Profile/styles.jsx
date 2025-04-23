@@ -7,6 +7,6 @@ export const PageContainer = styled.div`
   justify-content: center;
   width: 100%;
   max-width: 400px;
-  height: 100vh;
+  height: 95vh;
   margin: auto;
 `;

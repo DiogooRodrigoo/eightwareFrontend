@@ -2,7 +2,7 @@ import { Inter } from "next/font/google";
 import "./styles/globals.css";
 
 import { AuthProvider } from "./context/SessionsProvider";
-
+import Footer from "./components/organisms/Footer/Footer";
 const inter = Inter({
   subsets: ["latin"],
   display: "swap",
@@ -20,6 +20,7 @@ export default function RootLayout({ children }) {
     <html lang="pt-br">
       <body className={inter.className}>
         <AuthProvider>{children}</AuthProvider>
+        <Footer />
       </body>
     </html>
   );

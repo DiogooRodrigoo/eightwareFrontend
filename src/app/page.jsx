@@ -1,9 +1,10 @@
 "use client";
-
-import SignInPage from "./pages/SignIn/SignInPage";
-import { isAuthenticated } from "./utils/tokenStorage";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { useRouter, usePathname } from "next/navigation";
+// utils
+import { isAuthenticated } from "./utils/tokenStorage";
+//components
+import SignInPage from "./pages/SignIn/SignInPage";
 
 export default function Home() {
   const router = useRouter();
@@ -15,9 +16,5 @@ export default function Home() {
     }
   }, [pathname]);
 
-  return (
-    <div>
-      <SignInPage />
-    </div>
-  );
+  return <SignInPage />;
 }
