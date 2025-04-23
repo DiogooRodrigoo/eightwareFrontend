@@ -2,11 +2,13 @@
 
 import { createContext, useContext, useState, useEffect } from "react";
 import { getAuthToken, removeAuthToken } from "../utils/tokenStorage";
+import { getMe } from "../api/user";
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(null);
+  const [user, setUser] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [hasMounted, setHasMounted] = useState(false);
 
@@ -16,6 +18,7 @@ export const AuthProvider = ({ children }) => {
     if (tokenFromCookie) {
       setToken(tokenFromCookie);
       setIsAuthenticated(true);
+      fetchUserData(tokenFromCookie);
     }
 
     setHasMounted(true);
@@ -24,6 +27,7 @@ export const AuthProvider = ({ children }) => {
   const login = (token) => {
     setToken(token);
     setIsAuthenticated(true);
+    fetchUserData(token);
   };
 
   const logout = () => {
@@ -33,10 +37,21 @@ export const AuthProvider = ({ children }) => {
     setIsAuthenticated(false);
   };
 
+  const fetchUserData = async (token) => {
+    try {
+      const userData = await getMe();
+      setUser(userData);
+    } catch (err) {
+      console.error("Erro ao obter dados do usuário:", err);
+    }
+  };
+
   if (!hasMounted) return null;
 
   return (
-    <AuthContext.Provider value={{ token, isAuthenticated, login, logout }}>
+    <AuthContext.Provider
+      value={{ token, isAuthenticated, login, logout, user }}
+    >
       {children}
     </AuthContext.Provider>
   );

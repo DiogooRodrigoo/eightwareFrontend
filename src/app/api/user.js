@@ -1,13 +1,29 @@
 export async function getMe() {
-  const token = getAuthToken();
+  const token = document.cookie
+    .split("; ")
+    .find((row) => row.startsWith("token="))
+    ?.split("=")[1];
 
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/me`, {
-    headers: { Authorization: `Bearer ${token}` },
-  });
-
-  if (!response.ok) {
-    throw new Error("Erro ao buscar dados do usuário.");
+  if (!token) {
+    throw new Error("Token de autenticação não encontrado.");
   }
 
-  return await response.json();
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/me`, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+  });
+
+  const data = await response.json();
+  console.log("Dados do usuário:", data);
+
+  if (!response.ok) {
+    throw new Error(
+      data?.error?.message || "Erro ao obter informações do usuário."
+    );
+  }
+
+  return data;
 }
