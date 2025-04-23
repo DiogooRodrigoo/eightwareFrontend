@@ -9,6 +9,7 @@ export const ContentsContainer = styled.div`
   width: 100%;
   max-width: 900px;
   padding-inline: 10px;
+  gap: 25px;
 `;
 
 export const FormContainer = styled.div`
@@ -25,7 +26,9 @@ export const Title = styled.h1`
 `;
 
 export const Description = styled.p`
+  width: 100%;
+  max-width: 400px;
   font-size: 16px;
-  font-weight: 400;
+  font-weight: 300;
   margin-bottom: 30px;
 `;

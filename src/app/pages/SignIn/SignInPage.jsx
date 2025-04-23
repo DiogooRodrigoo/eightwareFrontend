@@ -2,7 +2,7 @@
 import React from "react";
 import Image from "next/image";
 //styles
-import * as C from "./styles";
+import * as C from "../../styles/styles";
 //components
 import SignInForm from "../../components/organisms/SignInForm/SignInForm";
 //assets

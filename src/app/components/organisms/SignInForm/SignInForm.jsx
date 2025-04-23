@@ -8,6 +8,8 @@ import InputField from "../../molecules/InputField/InputField";
 import { validateLoginForm } from "../../../utils/validateLoginForm";
 //hooks
 import useAuth from "../../../hooks/useSessions";
+//styles
+import * as C from "./styles";
 
 export default function SignInForm() {
   const { signIn } = useAuth();
@@ -43,7 +45,7 @@ export default function SignInForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} noValidate>
+    <C.Form onSubmit={handleSubmit} noValidate>
       <InputField
         labelInput={"E-mail"}
         typeInput="email"
@@ -64,13 +66,16 @@ export default function SignInForm() {
         error={passwordError}
       />
 
-      {generalError && (
-        <p style={{ color: "red", marginTop: "8px" }}>{generalError}</p>
-      )}
+      {generalError && <C.LabelError>{generalError}</C.LabelError>}
 
       <Button type="submit" disabled={!isFormFilled}>
         Entrar
       </Button>
-    </form>
+
+      <C.RegisterText>
+        Ainda nao tem conta ? {""}
+        <C.RegisterLink href="/signup">Cadastre-se aqui</C.RegisterLink>
+      </C.RegisterText>
+    </C.Form>
   );
 }
