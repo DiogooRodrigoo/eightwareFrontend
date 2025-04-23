@@ -1,7 +1,7 @@
 "use client";
 
 import { useAuthContext } from "../context/SessionsProvider";
-import { loginRequest } from "../api/auth";
+import { loginRequest, registerRequest } from "../api/auth";
 import { getMe } from "../api/user";
 
 export default function useAuth() {
@@ -29,5 +29,32 @@ export default function useAuth() {
     }
   };
 
-  return { signIn };
+  const signUp = async ({
+    full_name,
+    email,
+    password,
+    password_confirmation,
+  }) => {
+    try {
+      console.log("Enviando para registro:", {
+        full_name,
+        email,
+        password,
+        password_confirmation,
+      });
+
+      await registerRequest({
+        full_name,
+        email,
+        password,
+        password_confirmation,
+      });
+    } catch (error) {
+      throw new Error(
+        error?.message || "Erro ao realizar cadastro do usuário."
+      );
+    }
+  };
+
+  return { signIn, signUp };
 }

@@ -9,7 +9,9 @@ export const InputContainer = styled.input`
   font-size: 16px;
 
   &::placeholder {
-    color: #000;
+    color: #717171;
     opacity: 1;
+    font-size: 13px;
+    font-weight: 200;
   }
 `;
