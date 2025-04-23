@@ -1,20 +1,23 @@
 "use client";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-//components
+// components
 import Button from "../../atoms/Button/Button";
 import InputField from "../../molecules/InputField/InputField";
-//hooks
+import Modal from "../../organisms/Modal/Modal";
+// hooks
 import useAuth from "../../../hooks/useSessions";
-//utils
+// utils
 import { validateSignUpForm } from "../../../utils/validadeSignUpForm";
+// styles
+import * as C from "./styles";
 
 const SignUpForm = () => {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [status, setStatus] = useState("");
+
   const { signUp } = useAuth();
   const router = useRouter();
 
@@ -23,6 +26,16 @@ const SignUpForm = () => {
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
+  const [status, setStatus] = useState("");
+  const [isSuccess, setIsSuccess] = useState(false);
+
+  const [showModal, setShowModal] = useState(false);
+
+  const isFormFilled =
+    fullName.trim() !== "" &&
+    email.trim() !== "" &&
+    password.trim() !== "" &&
+    confirmPassword.trim() !== "";
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -49,15 +62,29 @@ const SignUpForm = () => {
         password_confirmation: confirmPassword,
       });
 
-      setStatus("Cadastro realizado com sucesso!");
-      router.push("/profile");
+      setStatus(
+        "Agora você será redirecionado para a tela de login para acessar sua conta."
+      );
+      setIsSuccess(true);
+      setShowModal(true);
     } catch (err) {
+      setStatus("Por favor, verifique seus dados e tente novamente.");
       console.error("Erro ao realizar cadastro:", err);
+
+      if (err?.response?.data?.errors) {
+        const errorMessages = Object.values(err.response.data.errors).join(
+          ", "
+        );
+        setStatus(`Erro ao tentar cadastrar: ${errorMessages}`);
+      }
+
+      setIsSuccess(false);
+      setShowModal(true);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} noValidate>
       <InputField
         labelInput="Nome Completo"
         placeholderInput="Digite seu nome completo"
@@ -92,9 +119,31 @@ const SignUpForm = () => {
         error={confirmPasswordError}
       />
 
-      <Button type="submit">Cadastrar</Button>
+      <Button type="submit" disabled={!isFormFilled}>
+        Cadastrar
+      </Button>
 
-      {status && <p style={{ marginTop: 16 }}>{status}</p>}
+      <C.FormRedirectText>
+        Já tem uma conta?{" "}
+        <C.FormRedirectLink onClick={() => router.push("/")}>
+          Faça login
+        </C.FormRedirectLink>
+      </C.FormRedirectText>
+
+      {showModal && (
+        <Modal
+          title={
+            isSuccess
+              ? "Cadastro realizado com sucesso!"
+              : "Ocorreu um erro durante o cadastro."
+          }
+          message={status}
+          onClose={() => {
+            setShowModal(false);
+            if (isSuccess) router.push("/");
+          }}
+        />
+      )}
     </form>
   );
 };
