@@ -88,6 +88,7 @@ const SignUpForm = () => {
       <InputField
         labelInput="Nome Completo"
         placeholderInput="Digite seu nome completo"
+        typeInput="name"
         valueInput={fullName}
         onChangeInput={(e) => setFullName(e.target.value)}
         error={fullNameError}
@@ -96,6 +97,7 @@ const SignUpForm = () => {
       <InputField
         labelInput="E-mail"
         placeholderInput="Digite seu e-mail"
+        typeInput="email"
         valueInput={email}
         onChangeInput={(e) => setEmail(e.target.value)}
         error={emailError}
@@ -104,7 +106,7 @@ const SignUpForm = () => {
       <InputField
         labelInput="Senha"
         placeholderInput="Digite sua senha"
-        type="password"
+        typeInput="password"
         valueInput={password}
         onChangeInput={(e) => setPassword(e.target.value)}
         error={passwordError}
@@ -113,7 +115,7 @@ const SignUpForm = () => {
       <InputField
         labelInput="Confirmar Senha"
         placeholderInput="Repita a senha"
-        type="password"
+        typeInput="password"
         valueInput={confirmPassword}
         onChangeInput={(e) => setConfirmPassword(e.target.value)}
         error={confirmPasswordError}
