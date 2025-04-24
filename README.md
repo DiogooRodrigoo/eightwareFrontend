@@ -78,7 +78,7 @@ O projeto estará disponível em http://localhost:3000
 
 ---
 
-Com essas orientações, você conseguirá copiar o repositório, instalar as dependências e rodar o projeto **Projeto Front-end** no seu ambiente local. Caso precise de mais assistência, não hesite em me procurar.
+Com essas orientações, você conseguirá copiar o repositório, instalar as dependências e rodar o **Projeto Front-end** no seu ambiente local. Caso precise de mais assistência, não hesite em me procurar.
 
 Desenvolvido por Diogo Rodrigo Pedreira Galvão, 2025.
 Todos os direitos de uso de imagem e atribuições deste trabalho estão diretamente relacionados à empresa Eightware Technology.
