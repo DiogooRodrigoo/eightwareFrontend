@@ -7,6 +7,7 @@ import InputField from "../../molecules/InputField/InputField";
 import Modal from "../../organisms/Modal/Modal";
 //utils
 import { validateLoginForm } from "../../../utils/validateLoginForm";
+import { errorMessages } from "../../../utils/errorMessages";
 //hooks
 import useAuth from "../../../hooks/useSessions";
 //styles
@@ -37,16 +38,27 @@ export default function SignInForm() {
     if (!isValid) return;
 
     try {
-      setGeneralError("");
       const data = await signIn(email, password);
       console.log("Login bem-sucedido:", data);
 
       setIsModalOpen(true);
       setTimeout(() => {
         router.push("/profile");
-      }, 5000);
-    } catch (err) {
-      setGeneralError("Erro ao tentar logar.");
+      }, 3000);
+    } catch (error) {
+      console.log("teste log", error.message);
+      if (error.message === "email_not_found") {
+        setGeneralError(errorMessages.emailNotFound);
+      } else if (error.message === "invalid_password") {
+        setGeneralError(errorMessages.invalidPassword);
+      } else if (
+        error.message.includes("fetch") ||
+        error.message.includes("Network")
+      ) {
+        setGeneralError(errorMessages.connectionError);
+      } else {
+        setGeneralError(error.generalError);
+      }
     }
   };
 
@@ -91,7 +103,7 @@ export default function SignInForm() {
         <Modal
           title="Login Bem-Sucedido"
           message="Você foi redirecionado para o seu perfil."
-          onClose={closeModal}
+          hideCloseButton={true}
         />
       )}
     </C.Form>

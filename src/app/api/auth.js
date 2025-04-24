@@ -10,8 +10,7 @@ export async function loginRequest(email, password) {
   const data = await res.json();
 
   if (!res.ok) {
-    console.error("Erro ao fazer login:", res.status, data);
-    throw new Error(data?.error?.message || "Erro ao fazer login.");
+    throw new Error(data?.error);
   }
 
   return data.token;

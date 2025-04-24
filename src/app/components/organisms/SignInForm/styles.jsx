@@ -3,8 +3,12 @@ import styled from "styled-components";
 export const Form = styled.form``;
 
 export const LabelError = styled.p`
+  width: 100%;
+  max-width: 400px;
   color: red;
-  margin-top: 8px;
+  margin-top: 5px;
+  margin-bottom: 8px;
+  text-align: center;
 `;
 
 export const RegisterText = styled.p`
