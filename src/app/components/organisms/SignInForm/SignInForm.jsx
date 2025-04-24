@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 //components
 import Button from "../../atoms/Button/Button";
 import InputField from "../../molecules/InputField/InputField";
+import Modal from "../../organisms/Modal/Modal";
 //utils
 import { validateLoginForm } from "../../../utils/validateLoginForm";
 //hooks
@@ -20,6 +21,8 @@ export default function SignInForm() {
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [generalError, setGeneralError] = useState("");
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const isFormFilled = email.trim() !== "" && password.trim() !== "";
 
@@ -38,10 +41,17 @@ export default function SignInForm() {
       const data = await signIn(email, password);
       console.log("Login bem-sucedido:", data);
 
-      router.push("/profile");
+      setIsModalOpen(true);
+      setTimeout(() => {
+        router.push("/profile");
+      }, 5000);
     } catch (err) {
       setGeneralError("Erro ao tentar logar.");
     }
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
   };
 
   return (
@@ -76,6 +86,14 @@ export default function SignInForm() {
         Ainda nao tem conta ? {""}
         <C.RegisterLink href="/signup">Cadastre-se aqui</C.RegisterLink>
       </C.RegisterText>
+
+      {isModalOpen && (
+        <Modal
+          title="Login Bem-Sucedido"
+          message="Você foi redirecionado para o seu perfil."
+          onClose={closeModal}
+        />
+      )}
     </C.Form>
   );
 }
